@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
-import 'package:jakaa/styles.dart';
+import 'package:recipeapp/styles.dart';
 
 /*
 Pass the stful card widget to this stateless widget to alter image props
