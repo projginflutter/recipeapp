@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:recipeapp/widgets/carousel.dart';
+import 'package:recipeapp/widgets/recipe_card.dart';
 
 void main() => runApp(MyAppFactory());
 
@@ -31,7 +33,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Text ('My Widget Goes here'),
-    );
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          //margin: EdgeInsets.symmetric(vertical:50),
+          height: 250,
+          child: Carousel(10,Axis.horizontal),
+          ),
+        ),
+      );
   }
 }

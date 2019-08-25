@@ -1,4 +1,4 @@
-name: jakaa
+name: recipeapp
 description: Share Project for widgets and pattern experiments
 
 # The following defines the version and build number for your application.
@@ -43,6 +43,8 @@ flutter:
 
   assets:
     - assets/images/apple.jpg
+    - assets/images/add-48.png
+    - assets/images/checked-48.png
     - assets/images/artichoke.jpg
     - assets/images/asparagus.jpg
     - assets/images/avocado.jpg
