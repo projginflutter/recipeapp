@@ -75,10 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   scrollDirection: Axis.vertical,
                   itemCount: 4,
                   itemBuilder: (context, index) {
-                    return Container(
-                        height: 250,
-                        child: FoodTray("Newly Added Recipes",
-                            Carousel(10, Axis.horizontal)));
+                    return FoodTray(
+                        "Newly Added Recipes", Carousel(10, Axis.horizontal));
                   },
                 ))
           ],

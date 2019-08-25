@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:recipeapp/widgets/recipe_card.dart';
 
+import '../styles.dart';
 import 'carousel.dart';
 
 class FoodTray extends StatelessWidget {
@@ -13,19 +14,21 @@ class FoodTray extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Stack(
+    return Column(
       children: <Widget>[
-        Container(
-          child: Text(name,
-              style: TextStyle(
-                  fontSize: 35.0,
-                  fontFamily: 'Timesroman',
-                  fontWeight: FontWeight.bold)),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(name, style: Styles.headlineText),
+            ],
+          ),
         ),
-        Container(
+        SizedBox(
+          height: 250,
           child: carousel,
-        )
+        ),
       ],
     );
   }
