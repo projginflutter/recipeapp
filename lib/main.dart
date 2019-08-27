@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipeapp/widgets/carousel.dart';
 import 'package:recipeapp/widgets/foodTray.dart';
-import 'package:recipeapp/widgets/recipe_card.dart';
 
 void main() => runApp(MyAppFactory());
 
@@ -76,7 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: 4,
                   itemBuilder: (context, index) {
                     return FoodTray(
-                        "Newly Added Recipes", Carousel(10, Axis.horizontal));
+                        "Newly Added Recipes",
+                        Carousel(10, Axis.horizontal,
+                            'assets/images/avacado.jpg', 'Avacado recipe'));
                   },
                 ))
           ],

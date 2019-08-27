@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:recipeapp/widgets/recipe_card.dart';
 
 import '../styles.dart';
 import 'carousel.dart';
