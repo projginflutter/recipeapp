@@ -6,16 +6,14 @@ import '../recipeDetail.dart';
 
 class Carousel extends StatelessWidget {
   //TODO change this to get model and relevant recipe data
-  Carousel(this.count, this.direction, this.foodName, this.imgPath);
+  Carousel(this.count, this.direction, this.imgPath, this.foodName);
 
   /// Recipe Name
   final int count;
   //Short description
   final Axis direction;
-
-  final String foodName;
-
   final String imgPath;
+  final String foodName;
 
   Widget _generateItem() {
     return Padding(
