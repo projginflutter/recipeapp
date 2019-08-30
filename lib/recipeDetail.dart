@@ -23,7 +23,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 height: 200.0,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/avocado.jpg'),
+                        image: AssetImage('assets/images/avocado.jpg'),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(100.0),
@@ -39,7 +39,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         width: 250.0,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(widget.heroTag),
+                                image: AssetImage(widget.heroTag.toString()),
                                 fit: BoxFit.cover)),
                       ))),
               Align(
