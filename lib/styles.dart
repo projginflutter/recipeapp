@@ -9,7 +9,7 @@ abstract class Styles {
   static const cardTitleText = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.9),
     fontFamily: 'NotoSans',
-    fontSize: 24,
+    fontSize: 22,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );
@@ -30,6 +30,14 @@ abstract class Styles {
     color: Color.fromRGBO(0, 0, 0, 0.8),
     fontFamily: 'NotoSans',
     fontSize: 32,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const carousalTitle = TextStyle(
+    color: Color.fromRGBO(0, 0, 0, 0.9),
+    fontFamily: 'NotoSans',
+    fontSize: 26,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
   );

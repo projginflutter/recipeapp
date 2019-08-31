@@ -34,7 +34,6 @@ class FrostyBackground extends StatelessWidget {
 }
 
 class PressableButton extends StatefulWidget {
-
   const PressableButton({
     this.borderRadius = const BorderRadius.all(Radius.circular(5)),
     this.duration = const Duration(milliseconds: 10),
@@ -55,7 +54,6 @@ class PressableButton extends StatefulWidget {
 }
 
 class _PressableButtonState extends State<PressableButton> {
-
   bool buttonIsDown = true;
 
   String bpath = 'assets/images/add-48.png';
@@ -66,26 +64,23 @@ class _PressableButtonState extends State<PressableButton> {
     super.initState();
     if (buttonIsDown) {
       bpath = 'assets/images/add-48.png';
-    } else  {
+    } else {
       bpath = 'assets/images/checked-48.png';
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: () {
         setState(() {
           if (buttonIsDown) {
-            buttonIsDown=false;
+            buttonIsDown = false;
             bpath = 'assets/images/checked-48.png';
-
-          } else  {
-            buttonIsDown=true;
+          } else {
+            buttonIsDown = true;
             bpath = 'assets/images/add-48.png';
           }
-
         });
         if (widget.onPressed != null) {
           widget.onPressed();
@@ -104,12 +99,12 @@ class _PressableButtonState extends State<PressableButton> {
           borderRadius: widget.borderRadius,
           child: Container(
             height: 35,
-            width:35,
+            width: 35,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                colorFilter:null,
+                colorFilter: null,
                 image: AssetImage(
                   bpath,
                 ),
@@ -123,7 +118,6 @@ class _PressableButtonState extends State<PressableButton> {
 }
 
 class PressableCard extends StatefulWidget {
-
   const PressableCard({
     @required this.child,
     this.borderRadius = const BorderRadius.all(Radius.circular(5)),
@@ -156,7 +150,6 @@ class PressableCard extends StatefulWidget {
 }
 
 class _PressableCardState extends State<PressableCard> {
-
   bool cardIsDown = false;
 
   @override
@@ -186,7 +179,6 @@ class _PressableCardState extends State<PressableCard> {
   }
 }
 
-
 class RecipeCard extends StatelessWidget {
   //TODO change this to get model and relevant recipe data
   RecipeCard(this.name, this.description, this.path);
@@ -199,7 +191,6 @@ class RecipeCard extends StatelessWidget {
   final String path;
 
   Widget _buildDetails() {
-
     return FrostyBackground(
       color: Color(0x90ffffff),
       child: Padding(
@@ -226,31 +217,29 @@ class RecipeCard extends StatelessWidget {
     return Stack(
       children: [
         Semantics(
-          label: 'A card background featuring ${this.name}',
-          child: PressableCard(
-              child: Container(
-                height: 250,
-                width:250,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(15)),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    colorFilter:null,
-                    image: AssetImage(
-                      this.path,
+            label: 'A card background featuring ${this.name}',
+            child: PressableCard(
+                child: Container(
+                  height: 250,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      colorFilter: null,
+                      image: AssetImage(
+                        this.path,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              onPressed: () {
-                //TODO Navigation for ios & android
-                // Navigator.of(context).push<void>(CupertinoPageRoute(
-                // builder: (context) => DetailsScreen(veggie.id),
-                // fullscreenDialog: true,
-                // ));
-              }
-          )
-        ),
+                onPressed: () {
+                  //TODO Navigation for ios & android
+                  // Navigator.of(context).push<void>(CupertinoPageRoute(
+                  // builder: (context) => DetailsScreen(veggie.id),
+                  // fullscreenDialog: true,
+                  // ));
+                })),
         Positioned(
           bottom: 0,
           left: 0,
@@ -260,15 +249,13 @@ class RecipeCard extends StatelessWidget {
         Positioned(
           top: 0,
           right: 0,
-          child:PressableButton(
-            onPressed: () {
-              //TODO Include add to cart logic here to maintain item count.
-              //Navigator.of(context).push<void>(CupertinoPageRoute(
-              //builder: (context) => DetailsScreen(veggie.id),
-              //fullscreenDialog: true,
-              //));
-            }
-          ),
+          child: PressableButton(onPressed: () {
+            //TODO Include add to cart logic here to maintain item count.
+            //Navigator.of(context).push<void>(CupertinoPageRoute(
+            //builder: (context) => DetailsScreen(veggie.id),
+            //fullscreenDialog: true,
+            //));
+          }),
         ),
       ],
     );
