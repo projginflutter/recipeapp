@@ -76,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemBuilder: (context, index) {
                     return FoodTray(
                         "Newly Added Recipes",
-                        Carousel(10, Axis.horizontal,
-                            'assets/images/avacado.jpg', 'Avacado recipe'));
+                        Carousel(6, Axis.horizontal, 'assets/images/plates',
+                            'Avacado recipe'));
                   },
                 ))
           ],

@@ -49,6 +49,13 @@ flutter:
     - assets/images/asparagus.jpg
     - assets/images/avocado.jpg
     - assets/images/blackberry.jpg
+    - assets/images/plates/plate1.png
+    - assets/images/plates/plate2.png
+    - assets/images/plates/plate3.png
+    - assets/images/plates/plate4.png
+    - assets/images/plates/plate5.png
+    - assets/images/plates/plate6.png
+
 
   fonts:
     - family: NotoSans
