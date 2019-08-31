@@ -1,23 +1,15 @@
 // Copyright 2018 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'recipe.g.dart';
 
 enum Category {
   breakfast,
   lunch,
   dinner,
   snacks,
-}
-
-enum Unit {
-  oz,
-  lb,
-  kg,
-  ml,
-  l,
 }
 
 const Map<Category, String> foodCategoryNames = {
@@ -27,19 +19,26 @@ const Map<Category, String> foodCategoryNames = {
   Category.snacks : "Snacks",
 };
 
+@JsonSerializable()
 class Ingredient {
   Ingredient (this.name, this.amount, this.unit);
   String name;
   int amount;
-  Unit unit;
+  String unit;
+  factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
+  Map<String, dynamic> toJson() => _$IngredientToJson(this);
 }
 
-class Step {
-  Step (this.stepNumber,this.instruction);
+@JsonSerializable()
+class Instruction {
+  Instruction (this.stepNumber,this.instruction);
   int stepNumber;
   String instruction;
+  factory Instruction.fromJson(Map<String, dynamic> json) => _$InstructionFromJson(json);
+  Map<String, dynamic> toJson() => _$InstructionToJson(this);
 }
 
+@JsonSerializable()
 class Recipe {
 
   Recipe({
@@ -65,7 +64,7 @@ class Recipe {
 
   final List<Ingredient> ingredients;
 
-  final List<Step> steps;
+  final List<Instruction> steps;
 
   final String shortDescription;
 
@@ -91,4 +90,6 @@ class Recipe {
 
   String get categoryName => foodCategoryNames[category];
 
+  factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
+  Map<String, dynamic> toJson() => _$RecipeToJson(this);
 }
