@@ -226,7 +226,7 @@ class RecipeCard extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(15)),
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      colorFilter: null,
+                      colorFilter: ColorFilter.mode(Colors.white, BlendMode.darken),
                       image: AssetImage(
                         this.path,
                       ),

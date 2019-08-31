@@ -25,7 +25,7 @@ class Carousel extends StatelessWidget {
                   foodName: foodName + indexContr))));
         },
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(6.0),
           child: RecipeCard(recipeName, recipeDesc, imgThumbnailPath),
         ));
 
@@ -42,7 +42,7 @@ class Carousel extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return DecoratedBox(
-        decoration: BoxDecoration(color: Color(0xffffffff)),
+        decoration: BoxDecoration(color: Colors.transparent),
         child: ListView.builder(
           itemCount: count,
           scrollDirection: this.direction,
