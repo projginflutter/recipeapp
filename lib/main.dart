@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipeapp/widgets/bottomBar.dart';
+import 'package:recipeapp/widgets/bottombar.dart';
 import 'package:recipeapp/widgets/home.dart';
 import 'package:recipeapp/widgets/favorites.dart';
 import 'package:recipeapp/widgets/search.dart';
