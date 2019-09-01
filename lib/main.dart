@@ -3,7 +3,7 @@ import 'package:recipeapp/widgets/bottombar.dart';
 import 'package:recipeapp/widgets/home.dart';
 import 'package:recipeapp/widgets/favorites.dart';
 import 'package:recipeapp/widgets/search.dart';
-import 'package:recipeapp/widgets/viewCart.dart';
+import 'package:recipeapp/widgets/view_cart.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/provider_bootstrap.dart';
 import 'package:provider/provider.dart';
