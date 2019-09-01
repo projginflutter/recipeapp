@@ -3,6 +3,8 @@ import 'package:recipeapp/services/recipe_service.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:recipeapp/model/recipe.dart';
+import 'package:recipeapp/model/ingredient.dart';
+import 'package:recipeapp/model/instruction.dart';
 
 class Recipes extends ChangeNotifier {
 
@@ -27,38 +29,37 @@ class Recipes extends ChangeNotifier {
     return snapshot;
   }
 
-  void addRecipe () {
-    Recipe recipe = Recipe(
-        id: 1,
-        name: 'Curd Rice',
-        imageAssetPath:  'assets/images/plates/plate1.png',
-        category: Category.lunch,
-        shortDescription: 'Best food ever.',
-        accentColor: Color(0x40de8c66),
-        vitaminAPercentage: 0,
-        vitaminCPercentage: 0,
-        servingSize: 'One serving of Curd Rice',
-        caloriesPerServing: 500,
-        ingredients: [
-          Ingredient(
-            'Rice',
-            100,
-            'oz',
-          ),
-          Ingredient(
-            'Curd',
-            2,
-            'oz',
-          ),
-        ],
-        steps: [
-          Instruction(
-              1,
-              "Mix Rice and yogurt"
-          )
-        ]
-    );
-    print (recipe.toJson());
-    _service.addDocument(recipe.toJson());
-  }
+//  void addRecipe () {
+//    Recipe recipe = Recipe(
+//        id: 2,
+//        name: 'Sambar Rice',
+//        imageAssetPath:  'assets/images/plates/plate2.png',
+//        category: Category.lunch,
+//        shortDescription: 'Sambar rice.',
+//        vitaminAPercentage: 0,
+//        vitaminCPercentage: 0,
+//        servingSize: 'One serving of sambar Rice',
+//        caloriesPerServing: 500,
+//        ingredients: [
+//          Ingredient(
+//            'Rice',
+//            100,
+//            'oz',
+//          ),
+//          Ingredient(
+//            'Sambar',
+//            2,
+//            'oz',
+//          ),
+//        ],
+//        steps: [
+//          Instruction(
+//              1,
+//              "Mix Rice and Sambhar"
+//          )
+//        ]
+//    );
+//    print (recipe.toJson());
+//    _service.addDocument(recipe.toJson());
+//  }
 }

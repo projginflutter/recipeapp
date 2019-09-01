@@ -3,6 +3,9 @@
 // found in the LICENSE file.
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:recipeapp/model/ingredient.dart';
+import 'package:recipeapp/model/instruction.dart';
+
 part 'recipe.g.dart';
 
 enum Category {
@@ -19,26 +22,7 @@ const Map<Category, String> foodCategoryNames = {
   Category.snacks : "Snacks",
 };
 
-@JsonSerializable()
-class Ingredient {
-  Ingredient (this.name, this.amount, this.unit);
-  String name;
-  int amount;
-  String unit;
-  factory Ingredient.fromJson(Map<String, dynamic> json) => _$IngredientFromJson(json);
-  Map<String, dynamic> toJson() => _$IngredientToJson(this);
-}
-
-@JsonSerializable()
-class Instruction {
-  Instruction (this.stepNumber,this.instruction);
-  int stepNumber;
-  String instruction;
-  factory Instruction.fromJson(Map<String, dynamic> json) => _$InstructionFromJson(json);
-  Map<String, dynamic> toJson() => _$InstructionToJson(this);
-}
-
-@JsonSerializable()
+@JsonSerializable(explicitToJson:true)
 class Recipe {
 
   Recipe({
@@ -49,7 +33,6 @@ class Recipe {
     @required this.steps,
     @required this.servingSize,
     @required this.caloriesPerServing,
-    @required this.accentColor,
     @required this.category,
     this.shortDescription = "No Short Description Available",
     this.vitaminAPercentage = 0,
@@ -67,10 +50,6 @@ class Recipe {
   final List<Instruction> steps;
 
   final String shortDescription;
-
-  /// A color value to use when constructing UI elements to match the image
-  /// found at [imageAssetPath].
-  final Color accentColor;
 
   /// Percentage of the FDA's recommended daily value of vitamin A for someone
   /// with a 2,000 calorie diet.

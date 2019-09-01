@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipeapp/widgets/bottomBar.dart';
 import 'package:recipeapp/widgets/home.dart';
+import 'package:provider/provider.dart';
+import 'package:recipeapp/provider_bootstrap.dart';
+import 'package:provider/provider.dart';
+import 'package:recipeapp/viewmodel/Recipes.dart';
+import 'package:recipeapp/services/recipe_service.dart';
+
 
 void main() => runApp(MyAppFactory());
 
@@ -8,9 +14,15 @@ class MyAppFactory extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(builder: (_) {
+        RecipeService _service = new RecipeService('recipes');
+        return Recipes(service: _service);
+      }),],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MyHomePage(),
+      ),
     );
   }
 }
