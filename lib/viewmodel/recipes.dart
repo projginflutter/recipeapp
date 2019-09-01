@@ -34,37 +34,38 @@ class Recipes extends ChangeNotifier {
     return snapshots;
   }
 
-//  void addRecipe () {
-//    Recipe recipe = Recipe(
-//        id: 6,
-//        name: 'Masala Dosa',
-//        imageAssetPath:  'assets/images/plates/plate6.png',
-//        category: Category.lunch,
-//        shortDescription: 'Masala Dosa',
-//        vitaminAPercentage: 0,
-//        vitaminCPercentage: 0,
-//        servingSize: '3 serving of Dosal',
-//        caloriesPerServing: 1500,
-//        ingredients: [
-//          Ingredient(
-//            'Dosa',
-//            200,
-//            'oz',
-//          ),
-//          Ingredient(
-//            'Vegetables',
-//            2,
-//            'oz',
-//          ),
-//        ],
-//        steps: [
-//          Instruction(
-//              1,
-//              "Mix Masala, Dosa and Chutney"
-//          )
-//        ]
-//    );
-//    print (recipe.toJson());
-//    _service.addDocument(recipe.toJson());
-//  }
+  void addRecipe () {
+    Recipe recipe = Recipe(
+        id: 8,
+        name: 'Podi Dosa',
+        imageAssetPath:  'assets/images/plates/plate2.png',
+        category: Category.lunch,
+        shortDescription: 'Ghee Dosa',
+        vitaminAPercentage: 0,
+        vitaminCPercentage: 0,
+        servingSize: '3 serving of Dosa',
+        caloriesPerServing: 1500,
+        ingredients: [
+          Ingredient(
+            'Dosa',
+            200,
+            'oz',
+          ),
+          Ingredient(
+            'Podi',
+            2,
+            'oz',
+          ),
+        ],
+        steps: [
+          Instruction(
+              1,
+              "Mix Podi, Dosa and Chutney"
+          )
+        ]
+    );
+    print (recipe.toJson());
+    _service.addDocument(recipe.toJson());
+    notifyListeners();
+  }
 }

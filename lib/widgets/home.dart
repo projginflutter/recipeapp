@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:recipeapp/viewmodel/Recipes.dart';
+import 'package:recipeapp/viewmodel/recipes.dart';
 import '../styles.dart';
 import 'carousel.dart';
 
@@ -46,6 +46,16 @@ class HomePage extends StatelessWidget {
                 _generateCarousals("Trending in your area"),
               ],
             )),
+        Positioned(
+          right: 0,
+          bottom: 0,
+          child: FloatingActionButton(
+              child: Text('+'),
+              onPressed: () {
+                //Provider.of<Recipes>(context).addRecipe();
+              },
+          ),
+        ),
       ],
     );
   }

@@ -1,5 +1,5 @@
 import 'package:provider/provider.dart';
-import 'package:recipeapp/viewmodel/Recipes.dart';
+import 'package:recipeapp/viewmodel/recipes.dart';
 import 'package:recipeapp/services/recipe_service.dart';
 
 
