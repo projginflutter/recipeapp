@@ -22,32 +22,37 @@ class Recipes extends ChangeNotifier {
   }) : _service = service;
 
 
-  Future getPosts(int userId) async {
+  Future getRecipes() async {
     setBusy(true);
     QuerySnapshot snapshot = await _service.getDataCollection();
     setBusy(false);
     return snapshot;
   }
 
+  Stream<QuerySnapshot> getRecipeStream() {
+    Stream<QuerySnapshot> snapshots =  _service.streamDataCollection();
+    return snapshots;
+  }
+
 //  void addRecipe () {
 //    Recipe recipe = Recipe(
-//        id: 2,
-//        name: 'Sambar Rice',
-//        imageAssetPath:  'assets/images/plates/plate2.png',
+//        id: 6,
+//        name: 'Masala Dosa',
+//        imageAssetPath:  'assets/images/plates/plate6.png',
 //        category: Category.lunch,
-//        shortDescription: 'Sambar rice.',
+//        shortDescription: 'Masala Dosa',
 //        vitaminAPercentage: 0,
 //        vitaminCPercentage: 0,
-//        servingSize: 'One serving of sambar Rice',
-//        caloriesPerServing: 500,
+//        servingSize: '3 serving of Dosal',
+//        caloriesPerServing: 1500,
 //        ingredients: [
 //          Ingredient(
-//            'Rice',
-//            100,
+//            'Dosa',
+//            200,
 //            'oz',
 //          ),
 //          Ingredient(
-//            'Sambar',
+//            'Vegetables',
 //            2,
 //            'oz',
 //          ),
@@ -55,7 +60,7 @@ class Recipes extends ChangeNotifier {
 //        steps: [
 //          Instruction(
 //              1,
-//              "Mix Rice and Sambhar"
+//              "Mix Masala, Dosa and Chutney"
 //          )
 //        ]
 //    );

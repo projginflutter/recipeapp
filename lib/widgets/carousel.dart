@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:recipeapp/widgets/recipe_card.dart';
-
+import 'package:recipeapp/model/recipe.dart';
+import 'package:provider/provider.dart';
 import '../recipeDetail.dart';
+import 'package:recipeapp/viewmodel/Recipes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Carousel extends StatelessWidget {
-  //TODO change this to get model and relevant recipe data
-  Carousel(this.count, this.direction, this.imgPath, this.foodName);
-
+class Carousel extends StatefulWidget {
   /// Recipe Name
   final int count;
   //Short description
@@ -15,18 +15,26 @@ class Carousel extends StatelessWidget {
   final String imgPath;
   final String foodName;
 
+  Carousel(this.count, this.direction, this.imgPath, this.foodName);
+
+  @override
+  _CarouselState createState() => _CarouselState();
+}
+
+class _CarouselState extends State<Carousel> {
+
   Widget _generateItem(BuildContext context, String recipeName,
       String recipeDesc, String imgThumbnailPath, String indexContr) {
     return InkWell(
         onTap: () {
           Navigator.of(context).push((MaterialPageRoute(
               builder: (context) => DetailsPage(
-                  heroTag: imgPath + '/plate' + indexContr + '.png',
-                  foodName: foodName + indexContr))));
+                  heroTag: widget.imgPath + '/plate' + indexContr + '.png',
+                  foodName: widget.foodName + indexContr))));
         },
         child: Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: RecipeCard(recipeName, recipeDesc, imgThumbnailPath),
+            padding: const EdgeInsets.all(6.0),
+            child: RecipeCard(recipeName, recipeDesc, imgThumbnailPath)
         ));
 
     //TODO Get Data from provider based on criteria in the state
@@ -40,20 +48,38 @@ class Carousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Stream<QuerySnapshot> snapshots = Provider.of<Recipes>(context).getRecipeStream();
     // TODO: implement build
     return DecoratedBox(
         decoration: BoxDecoration(color: Colors.transparent),
-        child: ListView.builder(
-          itemCount: count,
-          scrollDirection: this.direction,
-          itemBuilder: (context, index) {
-            return _generateItem(
-                context,
-                'Recipe Name',
-                'Desc of the recipe',
-                imgPath + '/plate' + (index + 1).toString() + '.png',
-                (index + 1).toString());
-          },
+        child: StreamBuilder(
+            stream: snapshots,
+            builder: (context, snapshot) {
+              switch(snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return Center(
+                    //child:PlatformProgressIndicator(),
+                  );
+                default:
+                  return ListView.builder(
+                    reverse: true,
+                    itemCount: snapshot.data.documents.length,
+                    scrollDirection: widget.direction,
+                    itemBuilder: (context, index) {
+                      List rev = snapshot.data.documents.reversed.toList();
+                      DocumentSnapshot document = rev[index];
+                      return _generateItem(
+                          context,
+                          document['name'],
+                          document['shortDescription'],
+                          document['imageAssetPath'],
+                          (index + 1).toString());
+                    },
+                  );
+              }
+
+            }
         ));
   }
 }
