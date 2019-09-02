@@ -1,7 +1,7 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:recipeapp/screens/home.dart';
+import 'package:recipeapp/screens/recipes_list.dart';
 import 'package:recipeapp/screens/favorites.dart';
 import 'package:recipeapp/screens/search.dart';
 import 'package:recipeapp/screens/view_cart.dart';

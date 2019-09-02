@@ -73,7 +73,8 @@ class BottomBar extends StatelessWidget {
 
           BottomNavigationBarItem(
 
-              icon: Icon(Icons.shopping_cart, color: Colors.green),
+              icon: Icon(
+                  Icons.shopping_cart, color: Colors.green),
               title: Text('View Cart',
                 style: TextStyle(
                   color: Colors.green,

@@ -1,66 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'package:recipeapp/viewmodel/recipes.dart';
-import '../styles.dart';
-import 'package:recipeapp/widgets/carousel.dart';
+import 'package:recipeapp/screens/recipes_list.dart';
+import 'package:recipeapp/screens/favorites.dart';
+import 'package:recipeapp/screens/search.dart';
+import 'package:recipeapp/screens/view_cart.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage();
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
 
-  Widget _generateCarousals(String homeSection) {
-    String name = getNameFromSection(homeSection);
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(name, style: Styles.carousalTitle),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 250,
-          child: Carousel(
-              6, Axis.horizontal, 'assets/images/plates', 'Avacado recipe'),
-        ),
-      ],
-    );
-  }
+  final String title;
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _selectedPage = 0;
+
+  final _pageOptions = [HomePage(), SearchPage(), FavoritePage(), CartPage()];
 
   @override
   Widget build(BuildContext context) {
-    //Provider.of<Recipes>(context).addRecipe();
-    return Stack(
-      children: <Widget>[
-        Container(
-            padding: EdgeInsets.fromLTRB(5.0, 15.0, 15.0, 10.0),
-            child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-                _generateCarousals("Recently Added"),
-                _generateCarousals("Your Favorites"),
-                _generateCarousals("Trending in your area"),
-              ],
-            )),
-        Positioned(
-          right: 0,
-          bottom: 0,
-          child: FloatingActionButton(
-              child: Text('+'),
-              onPressed: () {
-                //Provider.of<Recipes>(context).addRecipe();
-              },
-          ),
-        ),
-      ],
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
+      body: _pageOptions[_selectedPage],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedPage,
+          onTap: (int pageIndex) {
+            setState(() {
+              _selectedPage = pageIndex;
+            });
+          }, // this will be set when a new tab is tapped
+          items: [
+            BottomNavigationBarItem(
+              icon: new Icon(
+                Icons.home,
+                color: Colors.green,
+              ),
+              title: new Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: new Icon(Icons.search, color: Colors.green),
+              title: new Text('Search'),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite, color: Colors.green),
+                title: Text('Favorites')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart, color: Colors.green),
+                title: Text('View Cart'))
+          ]),
     );
-  }
-
-  String getNameFromSection(String homeSection) {
-    return homeSection;
   }
 }
