@@ -3,6 +3,8 @@ import 'package:recipeapp/screens/recipes_list.dart';
 import 'package:recipeapp/screens/favorites.dart';
 import 'package:recipeapp/screens/search.dart';
 import 'package:recipeapp/screens/view_cart.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -13,6 +15,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   int _selectedPage = 0;
 
   final _pageOptions = [HomePage(), SearchPage(), FavoritePage(), CartPage()];

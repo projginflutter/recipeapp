@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/viewmodel/recipes.dart';
 import 'package:recipeapp/services/recipe_service.dart';
-import 'package:recipeapp/screens/home.dart';
+import 'package:recipeapp/screens/kings_landing.dart';
 
 void main() => runApp(MyAppFactory());
 
@@ -19,7 +19,7 @@ class MyAppFactory extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MyHomePage(),
+        home: LandingPage(),
       ),
     );
   }
