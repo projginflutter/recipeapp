@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:recipeapp/widgets/recipe_card.dart';
 import 'package:recipeapp/model/recipe.dart';
 import 'package:provider/provider.dart';
-import '../recipedetail.dart';
+import 'package:recipeapp/screens/recipedetail.dart';
 import 'package:recipeapp/viewmodel/recipes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
