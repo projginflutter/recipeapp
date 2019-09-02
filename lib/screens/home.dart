@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/viewmodel/recipes.dart';
 import '../styles.dart';
-import 'carousel.dart';
+import 'package:recipeapp/widgets/carousel.dart';
 
 class HomePage extends StatelessWidget {
   HomePage();
