@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:recipeapp/viewmodel/recipes.dart';
+import 'package:recipeapp/providers/recipes.dart';
 import '../styles.dart';
 import 'package:recipeapp/widgets/carousel.dart';
 

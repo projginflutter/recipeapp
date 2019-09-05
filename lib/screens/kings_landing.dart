@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipeapp/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:recipeapp/providers/user_data.dart';
+import 'package:provider/provider.dart';
 
 
 class LandingPage extends StatelessWidget {
@@ -29,7 +31,7 @@ class LandingPage extends StatelessWidget {
               ),
             );
           }
-          print (user.toString());
+          Provider.of<UserData>(context).setUser(user);
           return MyHomePage();
         } else {
           return Scaffold(
