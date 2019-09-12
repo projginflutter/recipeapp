@@ -7,6 +7,7 @@ class UserData extends ChangeNotifier {
 
   FirebaseUser get user => _user;
 
+
   void setUser(FirebaseUser value) {
     _user = value;
     //notifyListeners();

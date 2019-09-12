@@ -6,7 +6,6 @@ import '../styles.dart';
 import 'package:recipeapp/widgets/carousel.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage();
 
   Widget _generateCarousals(String homeSection) {
     String name = getNameFromSection(homeSection);
@@ -33,6 +32,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Provider.of<Recipes>(context).addRecipe();
+
     return Stack(
       children: <Widget>[
         Container(
