@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:recipeapp/widgets/recipe_card.dart';
-import 'package:recipeapp/model/recipe.dart';
+import 'package:recipeapp/providers/user_data.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/screens/recipedetail.dart';
 import 'package:recipeapp/providers/recipes.dart';
@@ -14,14 +14,21 @@ class Carousel extends StatefulWidget {
   final Axis direction;
   final String imgPath;
   final String foodName;
+  final String filter;
+  List<dynamic> favIds;
+  bool isRefreshed=false;
 
-  Carousel(this.count, this.direction, this.imgPath, this.foodName);
+  Carousel(this.count, this.direction, this.imgPath, this.foodName,this.filter);
 
   @override
   _CarouselState createState() => _CarouselState();
 }
 
 class _CarouselState extends State<Carousel> {
+
+  void initState() {
+    //tbd
+  }
 
   Widget _generateItem(BuildContext context, String recipeName,
       String recipeDesc, String imgThumbnailPath, String indexContr) {
@@ -45,6 +52,14 @@ class _CarouselState extends State<Carousel> {
             return RecipeCard(, , data.contains(category));
           }),*/
   }
+  void updateFavorite() async {
+    List<dynamic> favIds = await Provider.of<UserData>(context).favorites;
+    widget.favIds = favIds;
+    if (!widget.isRefreshed)
+      setState(() {
+        widget.isRefreshed=true;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,24 +76,32 @@ class _CarouselState extends State<Carousel> {
                   return Center(
                     //child:PlatformProgressIndicator(),
                   );
-                default:
+                default: {
+                  List rev = [];
+                  if (widget.filter != null && 'Favorites'.compareTo(widget.filter)==0) {
+                    updateFavorite();
+                    if (widget.favIds != null) {
+                      rev = snapshot.data.documents.where((d) => widget.favIds.contains(d['id'])).toList();
+                    }
+                  } else {
+                    rev = snapshot.data.documents.toList();
+                  }
                   return ListView.builder(
-                    reverse: true,
-                    itemCount: snapshot.data.documents.length,
+                    reverse: false,
+                    itemCount: rev.length,
                     scrollDirection: widget.direction,
                     itemBuilder: (context, index) {
-                      List rev = snapshot.data.documents.reversed.toList();
-                      DocumentSnapshot document = rev[index];
-                      return _generateItem(
-                          context,
-                          document['name'],
-                          document['shortDescription'],
-                          document['imageAssetPath'],
-                          (index + 1).toString());
-                    },
+                        DocumentSnapshot document = rev[index];
+                        return _generateItem(
+                            context,
+                            document['name'],
+                            document['shortDescription'],
+                            document['imageAssetPath'],
+                            (index + 1).toString());
+                      }
                   );
+                }
               }
-
             }
         ));
   }

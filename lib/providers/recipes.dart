@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipeapp/services/recipe_service.dart';
+import 'package:recipeapp/services/db_service.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:recipeapp/model/recipe.dart';
@@ -9,7 +9,7 @@ import 'package:recipeapp/model/instruction.dart';
 class Recipes extends ChangeNotifier {
 
   bool _busy = false;
-  RecipeService _service;
+  DbService _service;
   bool get busy => _busy;
 
   void setBusy(bool value) {
@@ -18,7 +18,7 @@ class Recipes extends ChangeNotifier {
   }
 
   Recipes({
-    @required RecipeService service,
+    @required DbService service,
   }) : _service = service;
 
 

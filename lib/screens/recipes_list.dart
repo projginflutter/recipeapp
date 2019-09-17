@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         SizedBox(
           height: 250,
           child: Carousel(
-              6, Axis.horizontal, 'assets/images/plates', 'Avacado recipe'),
+              6, Axis.horizontal, 'assets/images/plates', 'Avacado recipe',homeSection),
         ),
       ],
     );
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
               scrollDirection: Axis.vertical,
               children: <Widget>[
                 _generateCarousals("Recently Added"),
-                _generateCarousals("Your Favorites"),
+                _generateCarousals("Favorites"),
                 _generateCarousals("Trending in your area"),
               ],
             )),

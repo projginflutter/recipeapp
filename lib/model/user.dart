@@ -14,7 +14,7 @@ class User {
     this.favorites,
   });
 
-  final int id;
+  final String id;
 
   final String name;
 
@@ -22,7 +22,7 @@ class User {
 
   final String email;
 
-  final List<String> favorites;
+  final List<int> favorites;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
