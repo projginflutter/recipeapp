@@ -16,8 +16,10 @@ class UserData extends ChangeNotifier {
     List favIds= [];
     QuerySnapshot qs =  await _service.getDocumentById(_user.uid);
     List<DocumentSnapshot> docs =  qs.documents;
-    DocumentSnapshot ds = docs.first;
-    favIds = ds.data['favorites'];
+    if (docs.length > 0) {
+      favIds = docs.first.data['favorites'];
+    }
+
     return favIds;
   }
 
@@ -31,6 +33,10 @@ class UserData extends ChangeNotifier {
   void setUser(FirebaseUser value) {
     _user = value;
     //notifyListeners();
+  }
+
+  void addFavorite (int id) {
+
   }
 
   void addUser () {

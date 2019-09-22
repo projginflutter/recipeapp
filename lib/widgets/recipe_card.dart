@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:recipeapp/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:recipeapp/widgets/pressable_button.dart';
 
 /*
 Pass the stful card widget to this stateless widget to alter image props
@@ -33,89 +34,6 @@ class FrostyBackground extends StatelessWidget {
   }
 }
 
-class PressableButton extends StatefulWidget {
-  const PressableButton({
-    this.borderRadius = const BorderRadius.all(Radius.circular(5)),
-    this.duration = const Duration(milliseconds: 10),
-    this.onPressed,
-    Key key,
-  })  : assert(borderRadius != null),
-        assert(duration != null),
-        super(key: key);
-
-  final VoidCallback onPressed;
-
-  final BorderRadius borderRadius;
-
-  final Duration duration;
-
-  @override
-  _PressableButtonState createState() => _PressableButtonState();
-}
-
-class _PressableButtonState extends State<PressableButton> {
-  bool buttonIsDown = true;
-
-  String bpath = 'assets/images/add-48.png';
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    if (buttonIsDown) {
-      bpath = 'assets/images/add-48.png';
-    } else {
-      bpath = 'assets/images/checked-48.png';
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          if (buttonIsDown) {
-            buttonIsDown = false;
-            bpath = 'assets/images/checked-48.png';
-          } else {
-            buttonIsDown = true;
-            bpath = 'assets/images/add-48.png';
-          }
-        });
-        if (widget.onPressed != null) {
-          widget.onPressed();
-        }
-      },
-      //onTapDown: (details) => setState(() => buttonIsDown ? buttonIsDown=false:buttonIsDown=true),
-      //onTapCancel: () => setState(() => buttonIsDown = false),
-      child: AnimatedPhysicalModel(
-        elevation: 5.0,
-        borderRadius: widget.borderRadius,
-        shape: BoxShape.rectangle,
-        shadowColor: Colors.transparent,
-        duration: widget.duration,
-        color: Colors.transparent,
-        child: ClipRRect(
-          borderRadius: widget.borderRadius,
-          child: Container(
-            height: 35,
-            width: 35,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                colorFilter: null,
-                image: AssetImage(
-                  bpath,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class PressableCard extends StatefulWidget {
   const PressableCard({
@@ -181,7 +99,9 @@ class _PressableCardState extends State<PressableCard> {
 
 class RecipeCard extends StatelessWidget {
   //TODO change this to get model and relevant recipe data
-  RecipeCard(this.name, this.description, this.path);
+  RecipeCard(this.docId,this.name, this.description, this.path);
+
+  final String docId;
 
   /// Recipe Name
   final String name;
@@ -249,7 +169,7 @@ class RecipeCard extends StatelessWidget {
         Positioned(
           top: 0,
           right: 0,
-          child: PressableButton(onPressed: () {
+          child: PressableButton(buttonImgPath: 'assets/images/checked-48.png',buttonImgPathDown: 'assets/images/add-48.png',onPressed: () {
 
 
             //TODO Include add to cart logic here to maintain item count.
@@ -258,6 +178,18 @@ class RecipeCard extends StatelessWidget {
             //fullscreenDialog: true,
             //));
           }),
+        ),
+        Positioned(
+          top: 0,
+          left: 0,
+          child: PressableButton(buttonImgPath: 'assets/images/heart-48.png',buttonImgPathDown: 'assets/images/heart-down-48.png',onPressed: () {
+            
+          //TODO Include add to cart logic here to maintain item count.
+          //Navigator.of(context).push<void>(CupertinoPageRoute(
+          //builder: (context) => DetailsScreen(veggie.id),
+          //fullscreenDialog: true,
+          //));
+        }),
         ),
       ],
     );

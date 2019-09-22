@@ -30,7 +30,7 @@ class _CarouselState extends State<Carousel> {
     //tbd
   }
 
-  Widget _generateItem(BuildContext context, String recipeName,
+  Widget _generateItem(BuildContext context, String documentId, String recipeName,
       String recipeDesc, String imgThumbnailPath, String indexContr) {
     return InkWell(
         onTap: () {
@@ -41,7 +41,7 @@ class _CarouselState extends State<Carousel> {
         },
         child: Padding(
             padding: const EdgeInsets.all(6.0),
-            child: RecipeCard(recipeName, recipeDesc, imgThumbnailPath)
+            child: RecipeCard(documentId, recipeName, recipeDesc, imgThumbnailPath)
         ));
 
     //TODO Get Data from provider based on criteria in the state
@@ -94,6 +94,7 @@ class _CarouselState extends State<Carousel> {
                         DocumentSnapshot document = rev[index];
                         return _generateItem(
                             context,
+                            document.documentID,
                             document['name'],
                             document['shortDescription'],
                             document['imageAssetPath'],

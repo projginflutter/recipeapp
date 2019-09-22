@@ -55,6 +55,8 @@ flutter:
     - assets/images/apple.jpg
     - assets/images/add-48.png
     - assets/images/checked-48.png
+    - assets/images/heart-48.png
+    - assets/images/heart-down-48.png
     - assets/images/artichoke.jpg
     - assets/images/asparagus.jpg
     - assets/images/avocado.jpg
