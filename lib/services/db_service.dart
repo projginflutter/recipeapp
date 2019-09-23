@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DbService {
@@ -21,6 +20,10 @@ class DbService {
 
   Future<QuerySnapshot> getDocumentById(String id) async {
     return ref.where('id', isEqualTo:id).getDocuments();
+  }
+
+  Future<DocumentSnapshot> getDocument(String id){
+    return ref.document(id).get();
   }
 
   Future<void> removeDocument(String id){

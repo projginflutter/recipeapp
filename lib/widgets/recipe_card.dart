@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:recipeapp/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:recipeapp/widgets/pressable_button.dart';
+import 'package:recipeapp/providers/user_data.dart';
+import 'package:provider/provider.dart';
 
 /*
 Pass the stful card widget to this stateless widget to alter image props
@@ -99,9 +101,9 @@ class _PressableCardState extends State<PressableCard> {
 
 class RecipeCard extends StatelessWidget {
   //TODO change this to get model and relevant recipe data
-  RecipeCard(this.docId,this.name, this.description, this.path);
+  RecipeCard(this.docId,this.name, this.description, this.path, this.isFav);
 
-  final String docId;
+  final int docId;
 
   /// Recipe Name
   final String name;
@@ -109,6 +111,8 @@ class RecipeCard extends StatelessWidget {
   final String description;
   //Image Asset Path
   final String path;
+
+  final bool isFav;
 
   Widget _buildDetails() {
     return FrostyBackground(
@@ -169,27 +173,32 @@ class RecipeCard extends StatelessWidget {
         Positioned(
           top: 0,
           right: 0,
-          child: PressableButton(buttonImgPath: 'assets/images/checked-48.png',buttonImgPathDown: 'assets/images/add-48.png',onPressed: () {
+          child: PressableButton(
+              isSelected: true,
+              buttonImgPath: 'assets/images/checked-48.png',
+              buttonImgPathDown: 'assets/images/add-48.png',
+              onPressedDown: () {
+                Provider.of<UserData>(context).addFavorite(this.docId);
+              },
+              onRelease: () {
 
-
-            //TODO Include add to cart logic here to maintain item count.
-            //Navigator.of(context).push<void>(CupertinoPageRoute(
-            //builder: (context) => DetailsScreen(veggie.id),
-            //fullscreenDialog: true,
-            //));
-          }),
+              }),
         ),
         Positioned(
           top: 0,
           left: 0,
-          child: PressableButton(buttonImgPath: 'assets/images/heart-48.png',buttonImgPathDown: 'assets/images/heart-down-48.png',onPressed: () {
-            
-          //TODO Include add to cart logic here to maintain item count.
-          //Navigator.of(context).push<void>(CupertinoPageRoute(
-          //builder: (context) => DetailsScreen(veggie.id),
-          //fullscreenDialog: true,
-          //));
-        }),
+          child: PressableButton(
+              isSelected: !this.isFav,
+              buttonImgPath: 'assets/images/heart-48.png',
+              buttonImgPathDown: 'assets/images/heart-down-48.png',
+              onPressedDown: () {
+                Provider.of<UserData>(context).addFavorite(this.docId);
+
+              },
+              onRelease: () {
+                Provider.of<UserData>(context).addFavorite(this.docId);
+
+              }),
         ),
       ],
     );

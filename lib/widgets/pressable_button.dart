@@ -5,9 +5,11 @@ class PressableButton extends StatefulWidget {
   const PressableButton({
     this.borderRadius = const BorderRadius.all(Radius.circular(5)),
     this.duration = const Duration(milliseconds: 10),
-    this.onPressed,
+    this.onPressedDown,
+    this.onRelease,
     this.buttonImgPath,
     this.buttonImgPathDown,
+    this.isSelected,
     Key key,
   })  : assert(borderRadius != null),
         assert(duration != null),
@@ -15,7 +17,9 @@ class PressableButton extends StatefulWidget {
         assert(buttonImgPathDown != null),
         super(key: key);
 
-  final VoidCallback onPressed;
+  final VoidCallback onPressedDown;
+
+  final VoidCallback onRelease;
 
   final BorderRadius borderRadius;
 
@@ -25,12 +29,15 @@ class PressableButton extends StatefulWidget {
 
   final String buttonImgPathDown;
 
+  final bool isSelected;
+
   @override
-  _PressableButtonState createState() => _PressableButtonState();
+  _PressableButtonState createState() => _PressableButtonState(isSelected);
 }
 
 class _PressableButtonState extends State<PressableButton> {
-  bool buttonIsDown = true;
+
+  bool buttonIsDown;
   String bpath;
   @override
   void initState() {
@@ -51,14 +58,17 @@ class _PressableButtonState extends State<PressableButton> {
           if (buttonIsDown) {
             buttonIsDown = false;
             bpath = widget.buttonImgPathDown;
+            if (widget.onRelease != null) {
+              widget.onRelease();
+            }
           } else {
             buttonIsDown = true;
             bpath = widget.buttonImgPath;
+            if (widget.onPressedDown != null) {
+              widget.onPressedDown();
+            }
           }
         });
-        if (widget.onPressed != null) {
-          widget.onPressed();
-        }
       },
       //onTapDown: (details) => setState(() => buttonIsDown ? buttonIsDown=false:buttonIsDown=true),
       //onTapCancel: () => setState(() => buttonIsDown = false),
@@ -89,4 +99,6 @@ class _PressableButtonState extends State<PressableButton> {
       ),
     );
   }
+
+  _PressableButtonState(this.buttonIsDown);
 }

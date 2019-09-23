@@ -30,7 +30,7 @@ class _CarouselState extends State<Carousel> {
     //tbd
   }
 
-  Widget _generateItem(BuildContext context, String documentId, String recipeName,
+  Widget _generateItem(BuildContext context, bool isFav, int documentId, String recipeName,
       String recipeDesc, String imgThumbnailPath, String indexContr) {
     return InkWell(
         onTap: () {
@@ -41,7 +41,7 @@ class _CarouselState extends State<Carousel> {
         },
         child: Padding(
             padding: const EdgeInsets.all(6.0),
-            child: RecipeCard(documentId, recipeName, recipeDesc, imgThumbnailPath)
+            child: RecipeCard(documentId, recipeName, recipeDesc, imgThumbnailPath, isFav)
         ));
 
     //TODO Get Data from provider based on criteria in the state
@@ -78,8 +78,9 @@ class _CarouselState extends State<Carousel> {
                   );
                 default: {
                   List rev = [];
+                  updateFavorite();
                   if (widget.filter != null && 'Favorites'.compareTo(widget.filter)==0) {
-                    updateFavorite();
+
                     if (widget.favIds != null) {
                       rev = snapshot.data.documents.where((d) => widget.favIds.contains(d['id'])).toList();
                     }
@@ -92,9 +93,11 @@ class _CarouselState extends State<Carousel> {
                     scrollDirection: widget.direction,
                     itemBuilder: (context, index) {
                         DocumentSnapshot document = rev[index];
+                        bool isFav = (null != widget.favIds && widget.favIds.contains(document['id'])) ? true:false;
                         return _generateItem(
                             context,
-                            document.documentID,
+                            isFav,
+                            document['id'],
                             document['name'],
                             document['shortDescription'],
                             document['imageAssetPath'],
