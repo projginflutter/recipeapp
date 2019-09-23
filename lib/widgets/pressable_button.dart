@@ -32,7 +32,7 @@ class PressableButton extends StatefulWidget {
   final bool isSelected;
 
   @override
-  _PressableButtonState createState() => _PressableButtonState(isSelected);
+  _PressableButtonState createState() => _PressableButtonState(!isSelected,(!isSelected)?buttonImgPathDown:buttonImgPath);
 }
 
 class _PressableButtonState extends State<PressableButton> {
@@ -43,31 +43,33 @@ class _PressableButtonState extends State<PressableButton> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (buttonIsDown) {
+    /*if (buttonIsDown) {
       bpath = widget.buttonImgPathDown;
     } else {
       bpath = widget.buttonImgPath;
-    }
+    }*/
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          if (buttonIsDown) {
-            buttonIsDown = false;
-            bpath = widget.buttonImgPathDown;
-            if (widget.onRelease != null) {
-              widget.onRelease();
-            }
-          } else {
-            buttonIsDown = true;
-            bpath = widget.buttonImgPath;
-            if (widget.onPressedDown != null) {
-              widget.onPressedDown();
-            }
+        if (buttonIsDown) {
+          buttonIsDown = false;
+          bpath = widget.buttonImgPath;
+          if (widget.onPressedDown != null) {
+            widget.onPressedDown();
           }
+        } else {
+          print('Tapped');
+          buttonIsDown = true;
+          bpath = widget.buttonImgPathDown;
+          if (widget.onRelease != null) {
+            widget.onRelease();
+          }
+        }
+        setState(() {
+
         });
       },
       //onTapDown: (details) => setState(() => buttonIsDown ? buttonIsDown=false:buttonIsDown=true),
@@ -100,5 +102,5 @@ class _PressableButtonState extends State<PressableButton> {
     );
   }
 
-  _PressableButtonState(this.buttonIsDown);
+  _PressableButtonState(this.buttonIsDown,this.bpath);
 }

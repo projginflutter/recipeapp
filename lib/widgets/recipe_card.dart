@@ -174,11 +174,11 @@ class RecipeCard extends StatelessWidget {
           top: 0,
           right: 0,
           child: PressableButton(
-              isSelected: true,
+              isSelected: false,
               buttonImgPath: 'assets/images/checked-48.png',
               buttonImgPathDown: 'assets/images/add-48.png',
               onPressedDown: () {
-                Provider.of<UserData>(context).addFavorite(this.docId);
+                //Provider.of<UserData>(context).addFavorite(this.docId);
               },
               onRelease: () {
 
@@ -188,15 +188,14 @@ class RecipeCard extends StatelessWidget {
           top: 0,
           left: 0,
           child: PressableButton(
-              isSelected: !this.isFav,
+              isSelected: this.isFav,
               buttonImgPath: 'assets/images/heart-48.png',
               buttonImgPathDown: 'assets/images/heart-down-48.png',
               onPressedDown: () {
                 Provider.of<UserData>(context).addFavorite(this.docId);
-
               },
               onRelease: () {
-                Provider.of<UserData>(context).addFavorite(this.docId);
+                Provider.of<UserData>(context).removeFavorite(this.docId);
 
               }),
         ),

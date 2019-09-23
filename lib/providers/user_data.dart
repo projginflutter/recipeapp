@@ -53,6 +53,22 @@ class UserData extends ChangeNotifier {
     }
   }
 
+  void removeFavorite (int id) async {
+    QuerySnapshot qs =  await _service.getDocumentById(_user.uid);
+    List<DocumentSnapshot> docs =  qs.documents;
+    if (docs.length > 0) {
+      String docId = docs.first.documentID;
+      List favIds = docs.first.data['favorites'];
+      Map fData = docs.first.data;
+      print("The document ID (remove) is " + docId);
+      List updatedList = List.from(favIds);
+      if (favIds.contains(id))
+        updatedList.remove(id);
+      fData['favorites'] = updatedList;
+      _service.updateDocument(fData,docId);
+    }
+  }
+
   void addUser () async {
     QuerySnapshot qs =  await _service.getDocumentById(_user.uid);
     List<DocumentSnapshot> docs =  qs.documents;
