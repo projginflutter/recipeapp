@@ -178,9 +178,11 @@ class RecipeCard extends StatelessWidget {
               buttonImgPath: 'assets/images/checked-48.png',
               buttonImgPathDown: 'assets/images/add-48.png',
               onPressedDown: () {
+                print ('Added');
                 //Provider.of<UserData>(context).addFavorite(this.docId);
               },
               onRelease: () {
+                print ('Removed from Cart');
 
               }),
         ),
