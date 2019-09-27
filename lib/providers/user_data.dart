@@ -41,13 +41,18 @@ class UserData extends ChangeNotifier {
     QuerySnapshot qs =  await _service.getDocumentById(_user.uid);
     List<DocumentSnapshot> docs =  qs.documents;
     if (docs.length > 0) {
+      List updatedList;
       String docId = docs.first.documentID;
       List favIds = docs.first.data['favorites'];
       Map fData = docs.first.data;
       print("The document ID is " + docId);
-      List updatedList = List.from(favIds);
-      if (!favIds.contains(id))
-        updatedList.add(id);
+      if (null != favIds) {
+        updatedList = List.from(favIds);
+        if (!favIds.contains(id))
+          updatedList.add(id);
+      } else {
+        updatedList = new List();
+      }
       fData['favorites'] = updatedList;
       _service.updateDocument(fData,docId);
     }
@@ -57,11 +62,18 @@ class UserData extends ChangeNotifier {
     QuerySnapshot qs =  await _service.getDocumentById(_user.uid);
     List<DocumentSnapshot> docs =  qs.documents;
     if (docs.length > 0) {
+      List updatedList;
       String docId = docs.first.documentID;
       List favIds = docs.first.data['favorites'];
       Map fData = docs.first.data;
       print("The document ID (remove) is " + docId);
-      List updatedList = List.from(favIds);
+      if (null != favIds) {
+        updatedList = List.from(favIds);
+        if (!favIds.contains(id))
+          updatedList.remove(id);
+      } else {
+        updatedList = new List();
+      }
       if (favIds.contains(id))
         updatedList.remove(id);
       fData['favorites'] = updatedList;
