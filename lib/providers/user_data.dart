@@ -20,7 +20,6 @@ class UserData extends ChangeNotifier {
       favIds = docs.first.data['favorites'];
       print (favIds);
     }
-
     return favIds;
   }
 
@@ -55,7 +54,9 @@ class UserData extends ChangeNotifier {
       }
       fData['favorites'] = updatedList;
       _service.updateDocument(fData,docId);
+      //notifyListeners();
     }
+
   }
 
   void removeFavorite (int id) async {
@@ -77,8 +78,12 @@ class UserData extends ChangeNotifier {
       if (favIds.contains(id))
         updatedList.remove(id);
       fData['favorites'] = updatedList;
-      _service.updateDocument(fData,docId);
+      _service.updateDocument(fData,docId).whenComplete(() {
+        //notifyListeners();
+      });
+
     }
+
   }
 
   void addUser () async {

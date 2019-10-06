@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:recipeapp/widgets/recipe_card.dart';
 import 'package:recipeapp/providers/user_data.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
 import 'package:recipeapp/screens/recipedetail.dart';
+import 'package:recipeapp/screens/view_detail.dart';
+import 'package:recipeapp/model/recipe.dart';
 import 'package:recipeapp/providers/recipes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -31,13 +34,13 @@ class _CarouselState extends State<Carousel> {
   }
 
   Widget _generateItem(BuildContext context, bool isFav, int documentId, String recipeName,
-      String recipeDesc, String imgThumbnailPath, String indexContr) {
+      String recipeDesc, String imgThumbnailPath, Recipe recipe) {
     return InkWell(
         onTap: () {
           Navigator.of(context).push((MaterialPageRoute(
-              builder: (context) => DetailsPage(
-                  heroTag: widget.imgPath + '/plate' + indexContr + '.png',
-                  foodName: widget.foodName + indexContr))));
+              builder: (context) => ViewRecipe(
+                recipe: recipe,
+              ))));
         },
         child: Padding(
             padding: const EdgeInsets.all(6.0),
@@ -80,7 +83,6 @@ class _CarouselState extends State<Carousel> {
                   List rev = [];
                   updateFavorite();
                   if (widget.filter != null && 'Favorites'.compareTo(widget.filter)==0) {
-
                     if (widget.favIds != null) {
                       rev = snapshot.data.documents.where((d) => widget.favIds.contains(d['id'])).toList();
                     }
@@ -93,6 +95,18 @@ class _CarouselState extends State<Carousel> {
                     scrollDirection: widget.direction,
                     itemBuilder: (context, index) {
                         DocumentSnapshot document = rev[index];
+                        Map<String,dynamic> recMap = new Map<String,dynamic>.from(document.data);
+                        recMap.forEach((a,b) {
+                          if ('ingredients'==a || 'steps'==a) {
+                            List c = new List();
+                            (b as List).forEach((e) {
+                              e = new Map<String,dynamic>.from(e);
+                              c.add(e);
+                            });
+                            recMap[a] = c;
+                          }
+                        });
+                        Recipe recipe = Recipe.fromJson(recMap);
                         bool isFav = (null != widget.favIds && widget.favIds.contains(document['id'])) ? true:false;
                         return _generateItem(
                             context,
@@ -101,7 +115,8 @@ class _CarouselState extends State<Carousel> {
                             document['name'],
                             document['shortDescription'],
                             document['imageAssetPath'],
-                            (index + 1).toString());
+                            recipe,
+                        );
                       }
                   );
                 }

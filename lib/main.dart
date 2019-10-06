@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/providers/recipes.dart';
 import 'package:recipeapp/providers/user_data.dart';
+import 'package:recipeapp/providers/preferences.dart';
 import 'package:recipeapp/services/db_service.dart';
 import 'package:recipeapp/screens/kings_landing.dart';
 
@@ -21,6 +22,9 @@ class MyAppFactory extends StatelessWidget {
         ChangeNotifierProvider(builder: (_) {
           DbService _service = new DbService('users');
           return UserData(service: _service);
+        }),
+        ChangeNotifierProvider(builder: (_) {
+          return Preferences();
         }),
       ],
       child: MaterialApp(

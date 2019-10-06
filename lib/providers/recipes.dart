@@ -29,6 +29,13 @@ class Recipes extends ChangeNotifier {
     return snapshot;
   }
 
+  Future<Recipe> getRecipeByDocId(String id) async {
+    DocumentSnapshot snapshot = await _service.getDocument(id);
+    Recipe recipe = Recipe.fromJson(snapshot.data);
+    print('Here');
+    return recipe;
+  }
+
   Stream<QuerySnapshot> getRecipeStream() {
     Stream<QuerySnapshot> snapshots =  _service.streamDataCollection();
     return snapshots;

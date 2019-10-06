@@ -18,17 +18,17 @@ class _DetailsPageState extends State<DetailsPage> {
         children: <Widget>[
           Stack(
             children: <Widget>[
-              Container(height: 300.0),
-              Container(
-                height: 200.0,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/avocado.jpg'),
-                        fit: BoxFit.cover),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(100.0),
-                        bottomRight: Radius.circular(100.0))),
-              ),
+//              Container(height: 300.0),
+//              Container(
+//                height: 200.0,
+//                decoration: BoxDecoration(
+//                    image: DecorationImage(
+//                        image: AssetImage('assets/images/avocado.jpg'),
+//                        fit: BoxFit.cover),
+//                    borderRadius: BorderRadius.only(
+//                        bottomLeft: Radius.circular(100.0),
+//                        bottomRight: Radius.circular(100.0))),
+//              ),
               Positioned(
                   top: 50.0,
                   left: (MediaQuery.of(context).size.width / 2) - 125,
