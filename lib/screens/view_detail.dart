@@ -7,6 +7,8 @@ import 'package:recipeapp/styles.dart';
 import 'package:recipeapp/providers/preferences.dart';
 import 'package:recipeapp/providers/user_data.dart';
 import 'package:recipeapp/providers/recipes.dart';
+import 'package:recipeapp/widgets/step_list.dart';
+import 'package:recipeapp/widgets/ingredients.dart';
 import 'package:provider/provider.dart';
 
 class ServingInfoChart extends StatelessWidget {
@@ -236,18 +238,18 @@ class _ViewRecipeState extends State<ViewRecipe> {
               child: Column (
                 children:[
                   CupertinoSegmentedControl<int>(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(5.0),
                   children: {
                     0: SizedBox(
-                        width:150,
+                        width:200,
                         child:Center(child: Text('Facts & Info.'))
                     ),
                     1: SizedBox(
-                      width:150,
+                      width:200,
                       child:Center(child: Text('Ingredients')),
                     ),
                     2: SizedBox(
-                      width:150,
+                      width:200,
                       child:Center(child: Text('Instructions')),
                     )
                   },
@@ -258,7 +260,7 @@ class _ViewRecipeState extends State<ViewRecipe> {
                 ),
                   _selectedViewIndex == 0
                       ? InfoView(widget.recipe)
-                      : (_selectedViewIndex == 1)?InfoView(widget.recipe):InfoView(widget.recipe)
+                      : (_selectedViewIndex == 1)?IngredientsList(widget.recipe.ingredients):StepsList(widget.recipe.steps)
                 ]
               ),
             ),
