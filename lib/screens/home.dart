@@ -3,6 +3,7 @@ import 'package:recipeapp/screens/recipes_list.dart';
 import 'package:recipeapp/screens/favorites.dart';
 import 'package:recipeapp/screens/search.dart';
 import 'package:recipeapp/screens/view_cart.dart';
+import 'package:recipeapp/styles.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -38,19 +39,32 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: new Icon(
                 Icons.home,
                 color: Colors.green,
+                size: 25.0,
               ),
-              title: new Text('Home'),
+              title: new Text('Home', style: Styles.iconText,),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.search, color: Colors.green),
-              title: new Text('Search'),
+              icon: new Icon(
+                Icons.search,
+                color: Colors.green,
+                size: 25.0,
+              ),
+              title: new Text('Search',style: Styles.iconText,),
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite, color: Colors.green),
-                title: Text('Favorites')),
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.green,
+                  size: 25.0,),
+                title: Text('Favorites',style: Styles.iconText,),
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart, color: Colors.green),
-                title: Text('View Cart'))
+                icon: Icon(
+                  Icons.shopping_cart,
+                  color: Colors.green,
+                  size: 25.0,),
+                title: Text('View Cart', style: Styles.iconText,),
+            )
           ]),
     );
   }

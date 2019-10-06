@@ -4,8 +4,18 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 abstract class Styles {
+
+  static const iconText = TextStyle(
+    color: Colors.green,
+    fontFamily: 'NotoSans',
+    fontSize: 12,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.normal,
+  );
+
   static const cardTitleText = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 0.9),
     fontFamily: 'NotoSans',
