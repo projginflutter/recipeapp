@@ -5,6 +5,7 @@ import 'package:recipeapp/providers/user_data.dart';
 import 'package:recipeapp/providers/preferences.dart';
 import 'package:recipeapp/services/db_service.dart';
 import 'package:recipeapp/screens/kings_landing.dart';
+import 'package:recipeapp/router.dart';
 
 void main() => runApp(MyAppFactory());
 
@@ -28,8 +29,8 @@ class MyAppFactory extends StatelessWidget {
         }),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: LandingPage(),
+        onGenerateRoute: Router.generateRoute,
+        initialRoute: '/',
       ),
     );
   }
